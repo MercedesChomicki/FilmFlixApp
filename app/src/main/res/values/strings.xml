@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MovieApp</string>
     <string name="text_img_poster">Poster de la pelicula</string>
+    <string name="text_img_backdrop">Imagen de fondo</string>
 </resources>

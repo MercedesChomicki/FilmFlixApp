@@ -1,5 +1,6 @@
 package com.cursokotlin.movieapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -21,17 +22,27 @@ class MovieActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup RecyclerView
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-
-        viewModel.movies.observe(this) { movies ->
-            movieAdapter = MovieAdapter(movies)
-            recyclerView.adapter = movieAdapter
+        // Inicializamos el Adapter con un callback para manejar el click en la pelicula
+        movieAdapter = MovieAdapter(emptyList()) { movie ->
+            val intent = Intent(this, MovieDetailsActivity::class.java)
+            intent.putExtra("movie_id", movie.id)
+            startActivity(intent)
         }
 
+        // Configuramos el RecyclerView
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(this@MovieActivity, 3)
+            adapter = movieAdapter
+        }
+
+        // Observamos los datos de las películas desde el ViewModel
+        viewModel.movies.observe(this) { movies ->
+            // Cuando los datos cambian, actualizamos el adaptador
+            movieAdapter.updateMovies(movies)
+        }
+
+        // Cargamos las peliculas desde el ViewModel
         viewModel.getPopularMovies(BuildConfig.API_KEY)
+
     }
-
-
 }

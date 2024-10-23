@@ -9,14 +9,18 @@ class MovieDto (
     @SerializedName("title")
     var title: String,
     @SerializedName("poster_path")
-    var poster_path: String
+    var posterPath: String
 ) {
 
     fun toMovie() : Movie {
         return Movie (
             id = id,
             title = title,
-            poster_path = poster_path
+            posterPath = posterPath,
+            backdropPath = null,
+            overview = null,
+            genres = null,
+            voteAverage = null,
         )
     }
 }

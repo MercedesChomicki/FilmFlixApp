@@ -7,6 +7,14 @@ import javax.inject.Inject
 class MovieRepository @Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource
 ) {
+
+    suspend fun getMovieDetails(
+        apiKey: String,
+        movieId: Int
+    ) : Movie? {
+        return remoteDataSource.getMovieDetails(apiKey, movieId)
+    }
+
     suspend fun getPopularMovies(
         apiKey: String
     ) : List<Movie> {

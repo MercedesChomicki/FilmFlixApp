@@ -1,5 +1,6 @@
 package com.cursokotlin.movieapp.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,18 +11,27 @@ import com.cursokotlin.movieapp.databinding.ItemMovieBinding
 import com.cursokotlin.movieapp.ddl.models.Movie
 import com.cursokotlin.movieapp.utils.Constants
 
+/**
+ * El Adapter es responsable de inflar el layout de cada ítem (item_movie.xml) en el RecyclerView.
+ */
 class MovieAdapter(
-    private val movies: List<Movie>
+    private var movies: List<Movie>,
+    private val onMovieClick: (Movie) -> Unit // Callback para manejar el clic
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private var binding : ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie, onMovieClick: (Movie) -> Unit) {
             binding.movieTitle.text = movie.title
             Glide.with(binding.root.context)
-                .load("${BuildConfig.BASE_URL_IMAGES}${movie.poster_path}")
-                .apply(RequestOptions().override(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT))
+                .load("${BuildConfig.BASE_URL_IMAGES}${movie.posterPath}")
+                /*.apply(RequestOptions().override(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT))*/
                 .into(binding.moviePoster)
+
+            // Manejo del clic en la CardView
+            binding.cardViewMovie.setOnClickListener {
+                onMovieClick(movie)  // Llamada al callback con la película seleccionada
+            }
         }
     }
 
@@ -31,8 +41,16 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movies[position], onMovieClick)
     }
 
     override fun getItemCount() = movies.size
+
+    // Método para actualizar la lista de películas
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateMovies(newMovies: List<Movie>){
+        movies = newMovies
+        notifyDataSetChanged()
+    }
+
 }

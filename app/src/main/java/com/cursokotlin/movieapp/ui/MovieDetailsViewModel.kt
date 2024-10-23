@@ -12,20 +12,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(
+class MovieDetailsViewModel @Inject constructor(
     private val repository: MovieRepository
-) : ViewModel() {
+): ViewModel() {
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> get() = _movies
+    private val _movie = MutableLiveData<Movie>()
+    val movie : LiveData<Movie> get() = _movie
 
-    fun getPopularMovies(apiKey: String) {
+    fun getMovieDetails(apiKey: String, movieId: Int){
         viewModelScope.launch {
             try {
-                val movieList = repository.getPopularMovies(apiKey)
-                _movies.value = movieList
+                val movieDetails = repository.getMovieDetails(apiKey, movieId)
+                _movie.value = movieDetails
             } catch (e: Exception) {
-                Log.e("MovieViewModel", "Error fetching movies: $e")
+                Log.e("MovieDetailsViewModel", "Error fetching movie details: $e")
             }
         }
     }
