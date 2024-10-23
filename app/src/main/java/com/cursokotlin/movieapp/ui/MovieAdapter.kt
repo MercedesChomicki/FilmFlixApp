@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.cursokotlin.movieapp.BuildConfig
 import com.cursokotlin.movieapp.databinding.ItemMovieBinding
 import com.cursokotlin.movieapp.ddl.models.Movie
+import com.cursokotlin.movieapp.utils.Constants
 
 class MovieAdapter(
     private val movies: List<Movie>
@@ -17,7 +19,8 @@ class MovieAdapter(
         fun bind(movie: Movie) {
             binding.movieTitle.text = movie.title
             Glide.with(binding.root.context)
-                .load(BuildConfig.BASE_URL_IMAGES + movie.poster_path)
+                .load("${BuildConfig.BASE_URL_IMAGES}${movie.poster_path}")
+                .apply(RequestOptions().override(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT))
                 .into(binding.moviePoster)
         }
     }
