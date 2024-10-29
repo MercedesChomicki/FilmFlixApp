@@ -1,33 +1,33 @@
 package com.cursokotlin.movieapp.ui
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cursokotlin.movieapp.BuildConfig
 import com.cursokotlin.movieapp.R
 import com.cursokotlin.movieapp.databinding.ActivityDetailsMovieBinding
+import com.cursokotlin.movieapp.databinding.ErrorLayoutBinding
 import com.cursokotlin.movieapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class MovieDetailsActivity : AppCompatActivity() {
+class MovieDetailsActivity : BaseActivity(){
 
     private lateinit var binding : ActivityDetailsMovieBinding
+    private lateinit var errorBinding: ErrorLayoutBinding
     private val viewModel by viewModels<MovieDetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        errorBinding = ErrorLayoutBinding.bind(binding.errorLayout.root)
 
         // Obtenemos el ID de la película del intent
         val movieId = intent.getIntExtra("movie_id", -1)
@@ -38,22 +38,13 @@ class MovieDetailsActivity : AppCompatActivity() {
         observerViewModel()
 
         // Reintentamos cargar las películas
-        binding.retryButton.setOnClickListener {
-            binding.errorLayout.visibility = View.GONE
+        errorBinding.retryButton.setOnClickListener {
+            binding.errorLayout.root.visibility = View.GONE
             viewModel.getMovieDetails(BuildConfig.API_KEY, movieId)
         }
     }
 
     private fun observerViewModel(){
-
-        viewModel.loading.onEach { loading ->
-            setLoadingState(loading)
-        }.launchIn(lifecycleScope)
-
-        viewModel.errorState.onEach { errorState ->
-            if(errorState.isError) showErrorState(errorState.message)
-            else hideErrorState()
-        }.launchIn(lifecycleScope)
 
         // Observamos los cambios y actualizamos la UI
         viewModel.movie.onEach { movie ->
@@ -77,28 +68,14 @@ class MovieDetailsActivity : AppCompatActivity() {
             binding.movieGenresDetail.text = movie.genres?.joinToString(", ") { it.name }
 
         }.launchIn(lifecycleScope)
-    }
 
-    private fun setLoadingState(isLoading: Boolean) {
-        binding.movieDetailsLayout.isVisible = !isLoading
-        binding.progressBar.isVisible = isLoading
-    }
+        viewModel.loading.onEach { loading ->
+            setLoadingState(loading, binding.progressBar, binding.movieDetailsLayout)
+        }.launchIn(lifecycleScope)
 
-    private fun updateBackgroundColor(colorResId: Int) {
-        val color = ContextCompat.getColor(this, colorResId)
-        binding.movieDetailsLayout.background = ColorDrawable(color)
-    }
-
-    private fun showErrorState(message: String) {
-        updateBackgroundColor(R.color.errorColor)
-        binding.errorLayout.visibility = View.VISIBLE
-        binding.movieDetailsLayout.visibility = View.GONE
-        binding.errorMessage.text = message
-    }
-
-    private fun hideErrorState() {
-        // Resetea el fondo y oculta la vista de error si no hay error
-        updateBackgroundColor(R.color.backgroundColor)
-        binding.errorLayout.visibility = View.GONE
+        viewModel.errorState.onEach { errorState ->
+            if(errorState.isError) showErrorState(binding, errorState.message, binding.errorLayout, R.color.errorColor)
+            else hideErrorState(binding, binding.errorLayout, R.color.backgroundColor)
+        }.launchIn(lifecycleScope)
     }
 }

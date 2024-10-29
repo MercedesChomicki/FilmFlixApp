@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.activity.contextaware.OnContextAvailableListener;
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories;
 import dagger.hilt.android.internal.managers.ActivityComponentManager;
@@ -19,7 +18,7 @@ import java.lang.Override;
 /**
  * A generated base class to be extended by the @dagger.hilt.android.AndroidEntryPoint annotated class. If using the Gradle plugin, this is swapped as the base class via bytecode transformation.
  */
-public abstract class Hilt_MovieActivity extends AppCompatActivity implements GeneratedComponentManagerHolder {
+public abstract class Hilt_MovieActivity extends BaseActivity implements GeneratedComponentManagerHolder {
   private SavedStateHandleHolder savedStateHandleHolder;
 
   private volatile ActivityComponentManager componentManager;
@@ -30,11 +29,6 @@ public abstract class Hilt_MovieActivity extends AppCompatActivity implements Ge
 
   Hilt_MovieActivity() {
     super();
-    _initHiltInternal();
-  }
-
-  Hilt_MovieActivity(int contentLayoutId) {
-    super(contentLayoutId);
     _initHiltInternal();
   }
 
