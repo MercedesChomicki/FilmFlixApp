@@ -1,7 +1,5 @@
 package com.cursokotlin.movieapp.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cursokotlin.movieapp.ddl.data.MovieRepository
@@ -28,17 +26,8 @@ class MovieViewModel @Inject constructor(
     private val _errorState = MutableStateFlow(ErrorState())
     val errorState: StateFlow<ErrorState> get() = _errorState
 
-    /*private val _error = MutableStateFlow(false)
-    val error: StateFlow<Boolean> get() = _error
-
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage*/
-
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     val movies: StateFlow<List<Movie>> get() = _movies
-
-    /*private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> get() = _movies*/
 
     fun getPopularMovies(apiKey: String) {
         _loading.value = true
@@ -58,33 +47,5 @@ class MovieViewModel @Inject constructor(
             }
             _loading.value = false
         }
-
-        /*viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val movieList = repository.getPopularMovies(apiKey)
-                withContext(Dispatchers.Main) {
-                    _movies.value = movieList
-                }
-            }  catch (e: IOException) {
-                withContext(Dispatchers.Main) {
-                    _error.value = true
-                    _errorMessage.value = "Network error. Please check your connection."
-                }
-            } catch (e: HttpException) {
-                withContext(Dispatchers.Main) {
-                    _error.value = true
-                    _errorMessage.value = "Server error: \n${e.message()}"
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    _error.value = true
-                    _errorMessage.value = "Unexpected error: ${e.message} Popular Movies"
-                }
-            }  finally {
-                withContext(Dispatchers.Main) {
-                    _loading.value = false
-                }
-            }
-        }*/
     }
 }
