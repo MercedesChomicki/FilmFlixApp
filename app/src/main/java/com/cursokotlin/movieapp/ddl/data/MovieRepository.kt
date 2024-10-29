@@ -11,7 +11,7 @@ class MovieRepository @Inject constructor(
     suspend fun getMovieDetails(
         apiKey: String,
         movieId: Int
-    ) : Movie? {
+    ) : Movie {
         return remoteDataSource.getMovieDetails(apiKey, movieId)
     }
 

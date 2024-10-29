@@ -10,8 +10,6 @@ class MovieDetailsDto (
     var title: String,
     @SerializedName("poster_path")
     var posterPath: String,
-    @SerializedName("backdrop_path")
-    var backdropPath: String,
     @SerializedName("overview")
     var overview: String,
     @SerializedName("genres")
@@ -25,7 +23,6 @@ class MovieDetailsDto (
             id = id,
             title = title,
             posterPath = posterPath,
-            backdropPath = backdropPath,
             overview = overview,
             genres = genres.map { it.toGenre() },
             voteAverage = voteAverage,

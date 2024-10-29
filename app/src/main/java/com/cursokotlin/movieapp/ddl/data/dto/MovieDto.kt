@@ -17,7 +17,6 @@ class MovieDto (
             id = id,
             title = title,
             posterPath = posterPath,
-            backdropPath = null,
             overview = null,
             genres = null,
             voteAverage = null,
