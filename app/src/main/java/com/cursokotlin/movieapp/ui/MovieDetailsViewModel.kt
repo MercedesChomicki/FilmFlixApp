@@ -36,9 +36,9 @@ class MovieDetailsViewModel @Inject constructor(
                 _movie.value = movie
             } catch (e: Exception) {
                 _errorState.value = when(e) {
-                    is IOException -> ErrorState(true, "Network error. Please check your connection.")
-                    is HttpException ->  ErrorState(true,"Server error: \n${e.message()}")
-                    else -> ErrorState(true, "Unexpected error: ${e.message}")
+                    is IOException -> ErrorState(true, "Network error", "Please check your connection.")
+                    is HttpException ->  ErrorState(true,"Server error:", e.message())
+                    else -> ErrorState(true, "Unexpected error", "Error fetching movie details")
                 }
             } finally {
                 _loading.value = false
@@ -46,24 +46,3 @@ class MovieDetailsViewModel @Inject constructor(
         }
     }
 }
-
-
-
-/*
-viewModelScope.launch {
-    val result = withContext(Dispatchers.IO) {
-        runCatching { repository.getMovieDetails(apiKey, movieId) }
-    }
-    result.onSuccess { movie ->
-        if(movie!= null){
-            _movie.value = movie
-        }
-    }.onFailure { e ->
-        _errorState.value = when(e) {
-            is IOException -> ErrorState(true, "Network error. Please check your connection.")
-            is HttpException ->  ErrorState(true,"Server error: \n${e.message()}")
-            else -> ErrorState(true, "Unexpected error: ${e.message} Popular Movies")
-        }
-    }
-    _loading.value = false
-}*/

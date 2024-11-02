@@ -2,23 +2,19 @@ package com.cursokotlin.movieapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cursokotlin.movieapp.BuildConfig
-import com.cursokotlin.movieapp.R
 import com.cursokotlin.movieapp.databinding.ActivityMainBinding
-import com.cursokotlin.movieapp.databinding.ErrorLayoutBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class MovieActivity : BaseActivity() {
+class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
 
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var errorBinding: ErrorLayoutBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var movieAdapter: MovieAdapter
     private val viewModel by viewModels<MovieViewModel>()
 
@@ -27,27 +23,18 @@ class MovieActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        errorBinding = ErrorLayoutBinding.bind(binding.errorLayout.root)
-
         initializeAdapter()
         setupRecyclerView()
         observeViewModel()
 
-        // Reintentamos cargar las películas
-        errorBinding.retryButton.setOnClickListener {
-            binding.errorLayout.root.visibility = View.GONE
-            viewModel.getPopularMovies(BuildConfig.API_KEY)
-        }
-
         // Cargamos las peliculas por primera vez
         //viewModel.getPopularMovies(BuildConfig.API_KEY)
-        viewModel.getPopularMovies("18964153bedioafeñ")
+        viewModel.getPopularMovies("18964153bedioafeñ") // Para testear error de conexion con la API
     }
 
     private fun observeViewModel() {
         // Observamos los datos de las películas desde el ViewModel
         viewModel.movies.onEach { movies ->
-            hideErrorState(binding, binding.errorLayout, R.color.backgroundColor) // Ocultamos el error y mostramos la lista de películas
             movieAdapter.updateMovies(movies) // Cuando los datos cambian, actualizamos el adaptador
         }.launchIn(lifecycleScope)
 
@@ -56,11 +43,14 @@ class MovieActivity : BaseActivity() {
         }.launchIn(lifecycleScope)
 
         viewModel.errorState.onEach { errorState ->
-            if (errorState.isError){
-                showErrorState(binding, errorState.message, binding.errorLayout, R.color.errorColor)
+            if (errorState.isError) {
+                showErrorDialog(errorState)
             }
-            else hideErrorState(binding, binding.errorLayout, R.color.backgroundColor)
         }.launchIn(lifecycleScope)
+    }
+
+    override fun retryConnection() {
+        viewModel.getPopularMovies(BuildConfig.API_KEY)
     }
 
     private fun setupRecyclerView() {
@@ -79,21 +69,3 @@ class MovieActivity : BaseActivity() {
         }
     }
 }
-
-/*private fun observeViewModel(){
-
-        // Observamos los datos de las películas desde el ViewModel
-        viewModel.movies.onEach { movies ->
-            hideErrorState() // Ocultamos el error y mostramos la lista de películas
-            movieAdapter.updateMovies(movies) // Cuando los datos cambian, actualizamos el adaptador
-        }.launchIn(lifecycleScope)
-
-        viewModel.loading.onEach { loading ->
-            setLoadingState(loading)
-        }.launchIn(lifecycleScope)
-
-        viewModel.errorState.onEach { errorState ->
-            if(errorState.isError) showErrorState(errorState.message)
-            else hideErrorState()
-        }.launchIn(lifecycleScope)
-    }*/

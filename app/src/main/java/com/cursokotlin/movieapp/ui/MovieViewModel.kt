@@ -40,9 +40,9 @@ class MovieViewModel @Inject constructor(
                 _movies.value = movies
             }.onFailure { e ->
                 _errorState.value = when(e) {
-                    is IOException -> ErrorState(true, "Network error. Please check your connection.")
-                    is HttpException ->  ErrorState(true,"Server error: \n${e.message()}")
-                    else -> ErrorState(true, "Unexpected error: ${e.message} Popular Movies")
+                    is IOException -> ErrorState(true, "Network error", "Please check your connection.")
+                    is HttpException ->  ErrorState(true,"Server error", e.message())
+                    else -> ErrorState(true, "Unexpected error", "${e.message} Popular Movies")
                 }
             }
             _loading.value = false

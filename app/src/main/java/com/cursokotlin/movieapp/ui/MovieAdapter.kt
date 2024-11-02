@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.cursokotlin.movieapp.BuildConfig
 import com.cursokotlin.movieapp.databinding.ItemMovieBinding
 import com.cursokotlin.movieapp.ddl.models.Movie
-import com.cursokotlin.movieapp.utils.Constants
 
 /**
  * El Adapter es responsable de inflar el layout de cada ítem (item_movie.xml) en el RecyclerView.

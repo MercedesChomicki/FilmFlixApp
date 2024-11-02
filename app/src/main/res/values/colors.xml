@@ -7,5 +7,6 @@
     <color name="errorColor">#FF0000</color>
     <color name="popupColor">#D7CBCB</color>
     <color name="retryButton">#2196F3</color>
+    <color name="primaryColor">#8034CE</color>
     <!--<color name="light_gray">#D3D3D3</color>-->
 </resources>
