@@ -27,7 +27,6 @@ class ErrorDialogFragment : DialogFragment() {
 
         // Configura el botón "Reintentar"
         binding.retryButton.setOnClickListener {
-            //(activity as? MovieActivity)?.retryConnection()
             (activity as? Retryable)?.retryConnection()
             dismiss() // Cierra el diálogo
         }
@@ -37,6 +36,9 @@ class ErrorDialogFragment : DialogFragment() {
             activity?.finish()
             dismiss() // Cierra el diálogo
         }
+
+        // Configura el diálogo para que no se cierre al tocar fuera de su área
+        isCancelable = false
 
         // Crea y devuelve el diálogo
         return AlertDialog.Builder(requireContext())

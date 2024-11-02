@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MovieApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Fondo -->
+        <item name="android:background">@color/backgroundColor</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:buttonTint">@color/buttonBackgroundColor</item>
     </style>
 
     <style name="Theme.MovieApp" parent="Base.Theme.MovieApp" />

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
+    <color name="darkGray">#3F3F3F</color>
+    <color name="lightGray">#B0B0B0</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="backgroundColor">#121212</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="errorColor">#FF0000</color>
-    <color name="popupColor">#D7CBCB</color>
-    <color name="retryButton">#2196F3</color>
-    <color name="primaryColor">#8034CE</color>
-    <!--<color name="light_gray">#D3D3D3</color>-->
+
+    <color name="orange">#FF5722</color>
+    <color name="darkOrange">#D84315</color>
+    <color name="goldenYellow">#FFC107</color>
+
+    <color name="variantOrange">#FF5722</color>
+    <color name="emeraldGreen">#4CAF50</color>
 </resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/orange</color> <!-- Color principal en tonos naranja -->
+    <color name="colorPrimaryDark">@color/darkOrange</color> <!-- Versión más oscura para variación -->
+    <color name="colorAccent">@color/goldenYellow</color> <!-- Color de acento en amarillo -->
+
+    <!-- Fondo -->
+    <color name="backgroundColor">@color/black</color>
+    <color name="overlayColor">@color/darkGray</color>
+    <color name="secondaryColor">@color/lightGray</color>
+
+    <!-- Texto -->
+    <color name="textPrimaryColor">@color/white</color>
+    <color name="textAccentColor">@color/variantOrange</color> <!-- Ej. color naranja para acentos -->
+
+    <!-- Botones y otros elementos -->
+    <color name="buttonBackgroundColor">@color/emeraldGreen</color> <!-- Color verde para botones -->
+</resources>
