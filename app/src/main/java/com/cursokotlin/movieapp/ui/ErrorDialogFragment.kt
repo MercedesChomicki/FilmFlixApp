@@ -40,13 +40,18 @@ class ErrorDialogFragment : DialogFragment() {
         isCancelable = false
 
         // Crea y devuelve el diálogo
-        return AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext())
             .setView(binding.root)
             .create()
+
+        // Establecer fondo transparente
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        return dialog
     }
 
     companion object {
-        // Método de fábrica para crear una instancia del diálogo con título y mensaje
+        // Método de fábrica para crear una instancia del diálogo
         fun newInstance(title: String, message: String): ErrorDialogFragment {
             val fragment = ErrorDialogFragment()
             val args = Bundle().apply {

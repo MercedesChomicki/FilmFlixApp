@@ -3,7 +3,6 @@
 <resources>
     <color name="black">#000000</color>
     <color name="darkGray">#3F3F3F</color>
-    <!--<color name="lightGray">#B0B0B0</color>-->
     <color name="lightGray">#F6F0EAEA</color>
     <color name="white">#FFFFFFFF</color>
 

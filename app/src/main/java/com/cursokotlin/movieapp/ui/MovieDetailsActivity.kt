@@ -64,7 +64,7 @@ class MovieDetailsActivity : BaseActivity(), ErrorDialogFragment.Retryable{
         }.launchIn(lifecycleScope)
 
         viewModel.loading.onEach { loading ->
-            setLoadingState(loading, binding.progressBar, binding.movieDetailsLayout)
+            setLoadingState(loading, binding.progressBar, binding.movieDetailsLayout, null)
         }.launchIn(lifecycleScope)
 
         viewModel.errorState.onEach { errorState ->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">@color/orange</color> <!-- Color principal en tonos naranja -->
-    <color name="accentColor">@color/goldenYellow</color> <!-- Color de acento en amarillo -->
+    <color name="primaryColor">@color/orange</color>
+    <color name="accentColor">@color/goldenYellow</color>
 
     <!-- Fondo -->
     <color name="backgroundColor">@color/black</color>
@@ -14,10 +14,3 @@
     <color name="textPopup">@color/darkGray</color>
     <color name="bgPopup">@color/white</color>
 </resources>
-
-    <!--<color name="primaryColor">@color/orange</color>
-        <color name="accentColor">@color/goldenYellow</color>
-        <color name="backgroundColor">@color/white</color>
-        <color name="textPrimaryColor">@color/darkGray</color>
-        <color name="textPopup">@color/darkGray</color>
-        <color name="bgPopup">@color/white</color>-->

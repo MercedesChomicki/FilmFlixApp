@@ -34,14 +34,14 @@ class MovieViewModel @Inject constructor(
 
     private val allMovies = mutableListOf<Movie>() // Lista completa de películas
 
-    private val _noResults = MutableStateFlow<Boolean>(false)
+    private val _noResults = MutableStateFlow(false)
     val noResults : StateFlow<Boolean> get() = _noResults
 
     private var hasSearched = false // Estado para saber si hubo una búsqueda
 
     fun getPopularMovies(apiKey: String) {
         _loading.value = true
-        _errorState.value = ErrorState() // Reset error state
+        _errorState.value = ErrorState() // Resetear el errorState
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 runCatching { repository.getPopularMovies(apiKey) }

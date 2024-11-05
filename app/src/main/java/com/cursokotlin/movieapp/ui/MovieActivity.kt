@@ -27,7 +27,7 @@ class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Encuentra el campo de búsqueda y ajusta el padding
+        // Cambia icono de busqueda
         val searchIcon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         searchIcon.setImageResource(R.drawable.ic_search)
         searchIcon.adjustViewBounds = true
@@ -36,8 +36,10 @@ class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
         setupRecyclerView()
         observeViewModel()
         searchMovie()
+        loadMovies()
+    }
 
-        // Cargamos las peliculas por primera vez
+    private fun loadMovies(){
         viewModel.getPopularMovies(BuildConfig.API_KEY)
         //viewModel.getPopularMovies("18964153bedioafeñ") // Para testear error de conexion con la API
     }
@@ -68,7 +70,7 @@ class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
         }.launchIn(lifecycleScope)
 
         viewModel.loading.onEach { loading ->
-            setLoadingState(loading, binding.progressBar, binding.recyclerView)
+            setLoadingState(loading, binding.progressBar, binding.recyclerView, binding.searchCard)
         }.launchIn(lifecycleScope)
 
         viewModel.errorState.onEach { errorState ->
