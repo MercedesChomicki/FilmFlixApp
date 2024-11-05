@@ -1,6 +1,7 @@
 package com.cursokotlin.movieapp.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -55,6 +56,7 @@ class MovieDetailsActivity : BaseActivity(), ErrorDialogFragment.Retryable{
 
             // Rating
             binding.movieRatingDetail.text = movie.voteAverage.toString()
+            binding.movieRatingDetail.visibility = View.VISIBLE
 
             // Géneros
             binding.movieGenresDetail.text = movie.genres?.joinToString(", ") { it.name }
@@ -68,6 +70,7 @@ class MovieDetailsActivity : BaseActivity(), ErrorDialogFragment.Retryable{
         viewModel.errorState.onEach { errorState ->
             if (errorState.isError) {
                 showErrorDialog(errorState)
+                binding.movieRatingDetail.visibility = View.GONE
             }
         }.launchIn(lifecycleScope)
     }
