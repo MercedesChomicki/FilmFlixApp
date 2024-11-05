@@ -28,8 +28,8 @@ class MovieDetailsActivity : BaseActivity(), ErrorDialogFragment.Retryable{
         // Obtenemos el ID de la película del intent
         movieId = intent.getIntExtra("movie_id", -1)
         if (movieId != -1){
-            //viewModel.getMovieDetails(BuildConfig.API_KEY, movieId)
-            viewModel.getMovieDetails("18964153bedioafeñ", movieId)
+            viewModel.getMovieDetails(BuildConfig.API_KEY, movieId)
+            //viewModel.getMovieDetails("18964153bedioafeñ", movieId)
         }
 
         observerViewModel()

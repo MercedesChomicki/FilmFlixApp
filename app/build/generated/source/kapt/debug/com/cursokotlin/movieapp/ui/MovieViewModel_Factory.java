@@ -2,6 +2,7 @@
 package com.cursokotlin.movieapp.ui;
 
 import com.cursokotlin.movieapp.ddl.data.MovieRepository;
+import com.cursokotlin.movieapp.utils.ResourceProvider;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -21,20 +22,26 @@ import javax.inject.Provider;
 public final class MovieViewModel_Factory implements Factory<MovieViewModel> {
   private final Provider<MovieRepository> repositoryProvider;
 
-  public MovieViewModel_Factory(Provider<MovieRepository> repositoryProvider) {
+  private final Provider<ResourceProvider> resourceProvider;
+
+  public MovieViewModel_Factory(Provider<MovieRepository> repositoryProvider,
+      Provider<ResourceProvider> resourceProvider) {
     this.repositoryProvider = repositoryProvider;
+    this.resourceProvider = resourceProvider;
   }
 
   @Override
   public MovieViewModel get() {
-    return newInstance(repositoryProvider.get());
+    return newInstance(repositoryProvider.get(), resourceProvider.get());
   }
 
-  public static MovieViewModel_Factory create(Provider<MovieRepository> repositoryProvider) {
-    return new MovieViewModel_Factory(repositoryProvider);
+  public static MovieViewModel_Factory create(Provider<MovieRepository> repositoryProvider,
+      Provider<ResourceProvider> resourceProvider) {
+    return new MovieViewModel_Factory(repositoryProvider, resourceProvider);
   }
 
-  public static MovieViewModel newInstance(MovieRepository repository) {
-    return new MovieViewModel(repository);
+  public static MovieViewModel newInstance(MovieRepository repository,
+      ResourceProvider resourceProvider) {
+    return new MovieViewModel(repository, resourceProvider);
   }
 }

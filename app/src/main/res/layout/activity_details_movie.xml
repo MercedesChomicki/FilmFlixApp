@@ -32,7 +32,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="UnusedAttribute"/>
-            <!--app:layout_constraintHeight_percent="0.5" /> &lt;!&ndash;Imagen ocupa la mitad de la pantalla &ndash;&gt;-->
 
             <!--Título de la película-->
             <TextView
@@ -40,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textPrimaryColor"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 app:layout_constraintTop_toBottomOf="@id/moviePosterDetail"
@@ -52,7 +51,7 @@
                 android:id="@+id/movieRatingDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textPrimaryColor"
                 android:textSize="18sp"
                 app:drawableLeftCompat="@drawable/ic_star"
                 app:layout_constraintTop_toBottomOf="@id/movieTitleDetail"
@@ -67,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/accentColor"
                 android:textSize="14sp"
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/movieRatingDetail"

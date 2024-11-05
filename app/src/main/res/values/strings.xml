@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">MovieApp</string>
-    <string name="text_img_poster">Poster de la pelicula</string>
-    <string name="text_img_backdrop">Imagen de fondo</string>
+    <string name="text_img_poster">Movie poster</string>
     <string name="retry_btn_text">Try again</string>
     <string name="closeApp">Close app</string>
 
-    <string name="error_network_title">Error de conexión</string>
-    <string name="error_network_message">No se pudo conectar a internet. Por favor, verifica tu conexión e inténtalo nuevamente.</string>
+    <string name="error_network_title">Connection error</string>
+    <string name="error_network_message">Could not connect to the Internet. Please check your connection and try again.</string>
 
-    <string name="error_server_title">Error del servidor</string>
-    <string name="error_server_message">Ocurrió un error en el servidor. Por favor, inténtalo de nuevo más tarde.</string>
+    <string name="error_server_title">Server error</string>
+    <string name="error_server_message">A server error occurred. Please try again later.</string>
 
-    <string name="error_unexpected_title">Error inesperado</string>
-    <string name="error_unexpected_message">Ocurrió un error inesperado. Por favor, inténtalo de nuevo.</string>
+    <string name="error_unexpected_title">Unexpected error</string>
+    <string name="error_unexpected_message">An unexpected error occurred. Please try again.</string>
 </resources>

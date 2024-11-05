@@ -33,8 +33,7 @@ class ErrorDialogFragment : DialogFragment() {
 
         // Configura el botón "Cerrar"
         binding.closeAppButton.setOnClickListener {
-            activity?.finish()
-            dismiss() // Cierra el diálogo
+            activity?.finishAffinity() // Cierra la aplicación por completo
         }
 
         // Configura el diálogo para que no se cierre al tocar fuera de su área
