@@ -2,7 +2,7 @@ package com.cursokotlin.movieapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
@@ -60,6 +60,11 @@ class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
         // Observamos los datos de las películas desde el ViewModel
         viewModel.movies.onEach { movies ->
             movieAdapter.updateMovies(movies) // Cuando los datos cambian, actualizamos el adaptador
+        }.launchIn(lifecycleScope)
+
+        // Observamos si se debe mostrar el mensaje de "No hay resultados"
+        viewModel.noResults.onEach { noResultsVisible ->
+            binding.noResultsTextView.visibility = if (noResultsVisible) View.VISIBLE else View.GONE
         }.launchIn(lifecycleScope)
 
         viewModel.loading.onEach { loading ->

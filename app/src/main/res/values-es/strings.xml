@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovieApp</string>
+
+    <!--Backdrop poster-->
     <string name="text_img_poster">Poster de la película</string>
+
+    <!--Error Dialog-->
     <string name="retry_btn_text">Reintentar</string>
     <string name="closeApp">Cerrar app</string>
 
+    <!--Error messages-->
     <string name="error_network_title">Error de conexión</string>
     <string name="error_network_message">No se pudo conectar a internet. Por favor, verifica tu conexión e inténtalo nuevamente.</string>
 
@@ -13,4 +18,7 @@
 
     <string name="error_unexpected_title">Error inesperado</string>
     <string name="error_unexpected_message">Ocurrió un error inesperado. Por favor, inténtalo de nuevo.</string>
+
+    <!--Search result-->
+    <string name="noResultsText">No hay resultados para la búsqueda</string>
 </resources>

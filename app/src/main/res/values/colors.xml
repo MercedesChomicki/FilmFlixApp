@@ -3,13 +3,10 @@
 <resources>
     <color name="black">#000000</color>
     <color name="darkGray">#3F3F3F</color>
-    <color name="lightGray">#B0B0B0</color>
+    <!--<color name="lightGray">#B0B0B0</color>-->
+    <color name="lightGray">#F6F0EAEA</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="orange">#FF5722</color>
-    <color name="darkOrange">#D84315</color>
     <color name="goldenYellow">#FFC107</color>
-
-    <color name="variantOrange">#FF5722</color>
-    <color name="emeraldGreen">#4CAF50</color>
 </resources>

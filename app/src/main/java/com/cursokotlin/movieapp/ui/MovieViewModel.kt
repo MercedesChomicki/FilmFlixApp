@@ -34,6 +34,11 @@ class MovieViewModel @Inject constructor(
 
     private val allMovies = mutableListOf<Movie>() // Lista completa de películas
 
+    private val _noResults = MutableStateFlow<Boolean>(false)
+    val noResults : StateFlow<Boolean> get() = _noResults
+
+    private var hasSearched = false // Estado para saber si hubo una búsqueda
+
     fun getPopularMovies(apiKey: String) {
         _loading.value = true
         _errorState.value = ErrorState() // Reset error state
@@ -69,10 +74,13 @@ class MovieViewModel @Inject constructor(
     }
 
     fun filterMovies(query: String){
-        _movies.value = if (query.isEmpty()) {
+        hasSearched = query.isNotEmpty() // Marcar si se ha hecho una búsqueda
+        val filteredMovies = if (query.isEmpty()) {
             allMovies
         } else {
             allMovies.filter { it.title.contains(query, ignoreCase = true) }
         }
+        _movies.value = filteredMovies
+        _noResults.value = hasSearched && filteredMovies.isEmpty() // Emitir si no hay resultados
     }
 }

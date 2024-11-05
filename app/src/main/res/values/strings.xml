@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">MovieApp</string>
+
+    <!--Backdrop poster-->
     <string name="text_img_poster">Movie poster</string>
+
+    <!--Error Dialog-->
     <string name="retry_btn_text">Try again</string>
     <string name="closeApp">Close app</string>
 
+    <!--Error messages-->
     <string name="error_network_title">Connection error</string>
     <string name="error_network_message">Could not connect to the Internet. Please check your connection and try again.</string>
 
@@ -12,4 +17,7 @@
 
     <string name="error_unexpected_title">Unexpected error</string>
     <string name="error_unexpected_message">An unexpected error occurred. Please try again.</string>
+
+    <!--Search result-->
+    <string name="noResultsText">There are no results for your search</string>
 </resources>
