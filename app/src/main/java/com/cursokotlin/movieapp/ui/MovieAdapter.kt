@@ -23,7 +23,6 @@ class MovieAdapter(
             binding.movieTitle.text = movie.title
             Glide.with(binding.root.context)
                 .load("${BuildConfig.BASE_URL_IMAGES}${movie.posterPath}")
-                /*.apply(RequestOptions().override(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT))*/
                 .into(binding.moviePoster)
 
             // Manejo del clic en la CardView

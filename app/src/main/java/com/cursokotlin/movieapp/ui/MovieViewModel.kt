@@ -32,6 +32,8 @@ class MovieViewModel @Inject constructor(
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     val movies: StateFlow<List<Movie>> get() = _movies
 
+    private val allMovies = mutableListOf<Movie>() // Lista completa de películas
+
     fun getPopularMovies(apiKey: String) {
         _loading.value = true
         _errorState.value = ErrorState() // Reset error state
@@ -40,6 +42,8 @@ class MovieViewModel @Inject constructor(
                 runCatching { repository.getPopularMovies(apiKey) }
             }
             result.onSuccess { movies ->
+                allMovies.clear()
+                allMovies.addAll(movies)
                 _movies.value = movies
             }.onFailure { e ->
                 _errorState.value = when(e) {
@@ -61,6 +65,14 @@ class MovieViewModel @Inject constructor(
                 }
             }
             _loading.value = false
+        }
+    }
+
+    fun filterMovies(query: String){
+        _movies.value = if (query.isEmpty()) {
+            allMovies
+        } else {
+            allMovies.filter { it.title.contains(query, ignoreCase = true) }
         }
     }
 }

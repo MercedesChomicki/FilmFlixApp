@@ -2,10 +2,14 @@ package com.cursokotlin.movieapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cursokotlin.movieapp.BuildConfig
+import com.cursokotlin.movieapp.R
 import com.cursokotlin.movieapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -23,13 +27,33 @@ class MovieActivity : BaseActivity(), ErrorDialogFragment.Retryable {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Encuentra el campo de búsqueda y ajusta el padding
+        val searchIcon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+        searchIcon.setImageResource(R.drawable.ic_search)
+        searchIcon.adjustViewBounds = true
+
         initializeAdapter()
         setupRecyclerView()
         observeViewModel()
+        searchMovie()
 
         // Cargamos las peliculas por primera vez
-        //viewModel.getPopularMovies(BuildConfig.API_KEY)
-        viewModel.getPopularMovies("18964153bedioafeñ") // Para testear error de conexion con la API
+        viewModel.getPopularMovies(BuildConfig.API_KEY)
+        //viewModel.getPopularMovies("18964153bedioafeñ") // Para testear error de conexion con la API
+    }
+
+    private fun searchMovie(){
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.filterMovies(query.orEmpty())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterMovies(newText.orEmpty())
+                return true
+            }
+        })
     }
 
     private fun observeViewModel() {

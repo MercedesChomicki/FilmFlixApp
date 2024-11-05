@@ -5,22 +5,19 @@
 
     <!-- Fondo -->
     <color name="backgroundColor">@color/black</color>
-    <color name="overlayColor">@color/darkGray</color>
-    <color name="secondaryColor">@color/lightGray</color>
+    <color name="backgroundSecondary">@color/lightGray</color>
 
     <!-- Texto -->
     <color name="textPrimaryColor">@color/white</color>
 
+    <!--Pop up-->
     <color name="textPopup">@color/darkGray</color>
     <color name="bgPopup">@color/white</color>
-
-<!--<color name="primaryColor">@color/orange</color>
-    <color name="accentColor">@color/goldenYellow</color>
-    <color name="backgroundColor">@color/white</color>
-    <color name="textPrimaryColor">@color/darkGray</color>
-    <color name="textPopup">@color/darkGray</color>
-    <color name="bgPopup">@color/white</color>-->
-
 </resources>
 
-
+    <!--<color name="primaryColor">@color/orange</color>
+        <color name="accentColor">@color/goldenYellow</color>
+        <color name="backgroundColor">@color/white</color>
+        <color name="textPrimaryColor">@color/darkGray</color>
+        <color name="textPopup">@color/darkGray</color>
+        <color name="bgPopup">@color/white</color>-->

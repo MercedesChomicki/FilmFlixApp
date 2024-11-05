@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.cursokotlin.movieapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cursokotlin.movieapp"
